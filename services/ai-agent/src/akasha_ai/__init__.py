@@ -1,0 +1,2 @@
+"""AkashaDesk AI service package."""
+

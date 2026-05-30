@@ -31,3 +31,66 @@ Use this file as the persistent ledger for all workspace modifications.
 - Checks Run:
   - Not run; documentation-only change.
 - Result: Future agents now have repository-wide guidance for AkashaDesk and must maintain `KEEP_CHANGES.MD` for all workspace modifications.
+
+- Timestamp (UTC): 2026-05-30T12:47:57Z
+- Summary: Started AkashaDesk implementation with a strict monorepo scaffold, no-public-port Docker Compose topology, typed Ktor core backend publish route, Bun BetterAuth identity service shell, FastAPI AI publishing preparation service, KMP desktop/client starter modules, SQLDelight local cache schema, Drizzle PostgreSQL schema, and project/tooling documentation.
+- Files Changed:
+  - .dockerignore
+  - .env.example
+  - .gitignore
+  - .mise.toml
+  - README.md
+  - build.gradle.kts
+  - docker-compose.yml
+  - gradle/libs.versions.toml
+  - settings.gradle.kts
+  - KEEP_CHANGES.MD
+  - apps/kmp-client/README.md
+  - apps/kmp-client/core-database/build.gradle.kts
+  - apps/kmp-client/core-database/src/commonMain/sqldelight/desk/akasha/database/QuestCache.sq
+  - apps/kmp-client/core-network/build.gradle.kts
+  - apps/kmp-client/core-network/src/commonMain/kotlin/desk/akasha/network/AkashaApiClient.kt
+  - apps/kmp-client/desktopApp/build.gradle.kts
+  - apps/kmp-client/desktopApp/src/main/kotlin/desk/akasha/desktop/Main.kt
+  - apps/kmp-client/feature-crucible/build.gradle.kts
+  - apps/kmp-client/feature-crucible/src/commonMain/kotlin/desk/akasha/crucible/domain/Quest.kt
+  - apps/kmp-client/feature-megaphone/build.gradle.kts
+  - apps/kmp-client/feature-megaphone/src/commonMain/kotlin/desk/akasha/megaphone/domain/MarkdownDraft.kt
+  - apps/kmp-client/feature-obsidian/build.gradle.kts
+  - apps/kmp-client/feature-obsidian/src/commonMain/kotlin/desk/akasha/obsidian/MarkdownVault.kt
+  - apps/kmp-client/feature-obsidian/src/desktopMain/kotlin/desk/akasha/obsidian/DesktopMarkdownVault.kt
+  - apps/kmp-client/shared/build.gradle.kts
+  - apps/kmp-client/shared/src/commonMain/kotlin/desk/akasha/app/AkashaApp.kt
+  - services/ai-agent/Dockerfile
+  - services/ai-agent/requirements-dev.txt
+  - services/ai-agent/requirements.txt
+  - services/ai-agent/src/akasha_ai/__init__.py
+  - services/ai-agent/src/akasha_ai/main.py
+  - services/auth-identity/Dockerfile
+  - services/auth-identity/package.json
+  - services/auth-identity/scripts/healthcheck.ts
+  - services/auth-identity/src/auth.ts
+  - services/auth-identity/src/index.ts
+  - services/auth-identity/tsconfig.json
+  - services/core-engine/Dockerfile
+  - services/core-engine/build.gradle.kts
+  - services/core-engine/healthcheck.sh
+  - services/core-engine/src/main/kotlin/desk/akasha/core/Main.kt
+  - services/core-engine/src/main/kotlin/desk/akasha/core/api/PublishRoutes.kt
+  - services/core-engine/src/main/kotlin/desk/akasha/core/application/PublishPostUseCase.kt
+  - services/core-engine/src/main/kotlin/desk/akasha/core/domain/PublishPost.kt
+  - services/core-engine/src/main/kotlin/desk/akasha/core/infra/AiAgentPublisher.kt
+  - services/core-engine/src/main/kotlin/desk/akasha/core/infra/BetterAuthTokenVerifier.kt
+  - services/core-engine/src/main/kotlin/desk/akasha/core/ports/PostPublisher.kt
+  - shared/schema/drizzle.config.ts
+  - shared/schema/package.json
+  - shared/schema/src/schema.ts
+- Checks Run:
+  - python -m py_compile services\ai-agent\src\akasha_ai\main.py -> failed because the Windows Store python.exe shim could not launch inside the sandbox.
+  - C:\Users\dia-camp\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m py_compile services\ai-agent\src\akasha_ai\main.py -> passed.
+  - C:\Users\dia-camp\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe -e "JSON.parse(...)" over service package files -> passed, json ok.
+  - docker compose config --quiet -> not run; docker command is unavailable in this shell.
+  - Get-Command gradle -ErrorAction SilentlyContinue -> gradle unavailable in this shell.
+  - Get-Command bun -ErrorAction SilentlyContinue -> bun unavailable in this shell.
+  - git diff --check -> passed with only a CRLF warning for KEEP_CHANGES.MD.
+- Result: The repository now has a concrete AkashaDesk foundation aligned to the Master Requirements Document. Python syntax and JSON package metadata validate locally; Docker/Gradle/Bun runtime checks are pending because those commands are unavailable in the current shell.

@@ -1,0 +1,12 @@
+.git
+.gradle
+**/build
+**/.kotlin
+**/node_modules
+**/.venv
+**/__pycache__
+**/.pytest_cache
+archive
+KEEP_CHANGES.MD
+AGENTS.md
+

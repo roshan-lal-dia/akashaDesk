@@ -1,0 +1,14 @@
+.gradle/
+.kotlin/
+build/
+out/
+node_modules/
+bun.lockb
+.venv/
+__pycache__/
+.pytest_cache/
+.env
+.env.*
+!.env.example
+drizzle/
+
