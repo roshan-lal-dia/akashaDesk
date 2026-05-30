@@ -5,3 +5,4 @@ if (!response.ok) {
   throw new Error(`auth healthcheck failed with ${response.status}`);
 }
 
+export {};

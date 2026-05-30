@@ -11,9 +11,15 @@ AkashaDesk is a sovereign command-center workspace for Dia and authenticated com
 
 ## Current Implementation Status
 
-This first implementation pass lays down the monorepo structure, Docker Compose deployment shape, health checks, and a typed Megaphone publish contract from the core backend to the AI service.
+The app is currently focused on Crucible first. The desktop KMP app now boots into an interactive Crucible dashboard backed by a pure Kotlin domain engine for Endurance, Grind, and Sprint quests.
 
 No backend service publishes a host port. Postgres stays on the internal Docker network only, while auth and AI services keep outbound egress for OAuth provider calls and GitHub publishing.
+
+## Run The Desktop App
+
+```powershell
+mise --yes exec -- gradle :apps:kmp-client:desktopApp:run
+```
 
 ## Local Start
 
@@ -34,7 +40,14 @@ Those routes are configured in Cloudflare for the named tunnel token.
 
 ## First Feature Slice
 
-The initial end-to-end slice is Megaphone publishing:
+The active product slice is Crucible:
+
+1. Create Endurance, Grind, and Sprint quests from the command panel.
+2. Select quests from the quest index.
+3. Mark active quests complete or failed.
+4. Watch HP, XP, level, streak, quest status, and event log update immediately.
+
+Megaphone/AI remains scaffolded for the later blog-maker slice:
 
 1. KMP client prepares a markdown draft.
 2. Core backend receives `POST /v1/publish` with a bearer token.

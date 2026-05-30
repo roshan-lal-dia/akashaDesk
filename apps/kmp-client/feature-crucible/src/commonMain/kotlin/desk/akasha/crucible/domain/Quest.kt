@@ -13,6 +13,7 @@ sealed interface Quest {
     val id: QuestId
     val title: String
     val createdAt: EpochMillis
+    val kind: QuestKind
 }
 
 data class EnduranceQuest(
@@ -20,14 +21,18 @@ data class EnduranceQuest(
     override val title: String,
     override val createdAt: EpochMillis,
     val damageOnFailure: Int,
-) : Quest
+) : Quest {
+    override val kind: QuestKind = QuestKind.ENDURANCE
+}
 
 data class GrindQuest(
     override val id: QuestId,
     override val title: String,
     override val createdAt: EpochMillis,
     val dailyXpReward: Int,
-) : Quest
+) : Quest {
+    override val kind: QuestKind = QuestKind.GRIND
+}
 
 data class SprintQuest(
     override val id: QuestId,
@@ -36,7 +41,22 @@ data class SprintQuest(
     val startsAt: EpochMillis,
     val endsAt: EpochMillis,
     val completionXpBounty: Int,
-) : Quest
+) : Quest {
+    override val kind: QuestKind = QuestKind.SPRINT
+}
+
+enum class QuestKind {
+    ENDURANCE,
+    GRIND,
+    SPRINT,
+}
+
+enum class QuestStatus {
+    ACTIVE,
+    COMPLETED,
+    FAILED,
+    PAUSED,
+}
 
 data class QuestProgress(
     val currentHp: Int,
@@ -50,4 +70,3 @@ data class ArenaInvite(
     val inviterId: CompanionId,
     val expiresAt: EpochMillis,
 )
-

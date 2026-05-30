@@ -5,11 +5,11 @@ import desk.akasha.core.domain.PublishResult
 import desk.akasha.core.ports.PostPublisher
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.request.contentType
 import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
+import io.ktor.http.contentType
 
 class AiAgentPublisher(
     private val client: HttpClient,
@@ -28,4 +28,3 @@ class AiAgentPublisher(
         }.body()
     }
 }
-

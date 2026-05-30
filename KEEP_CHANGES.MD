@@ -94,3 +94,38 @@ Use this file as the persistent ledger for all workspace modifications.
   - Get-Command bun -ErrorAction SilentlyContinue -> bun unavailable in this shell.
   - git diff --check -> passed with only a CRLF warning for KEEP_CHANGES.MD.
 - Result: The repository now has a concrete AkashaDesk foundation aligned to the Master Requirements Document. Python syntax and JSON package metadata validate locally; Docker/Gradle/Bun runtime checks are pending because those commands are unavailable in the current shell.
+
+- Timestamp (UTC): 2026-05-30T13:48:21Z
+- Summary: Shifted implementation focus to Crucible and made the desktop app compile around a working interactive Crucible dashboard. Added a pure Kotlin Crucible engine for Endurance, Grind, and Sprint quest actions, HP/XP/streak/status updates, event logging, seed state, and unit tests. Replaced the static Compose placeholder with a command-center Crucible UI for selecting quests, completing/failing quests, and creating new quests. Installed and verified the mise toolchain, stabilized Kotlin compilation on Windows, fixed Ktor client imports, removed the duplicate Compose Desktop run task, and corrected Bun/TypeScript package versions for auth and schema packages.
+- Files Changed:
+  - README.md
+  - apps/kmp-client/README.md
+  - apps/kmp-client/core-network/src/commonMain/kotlin/desk/akasha/network/AkashaApiClient.kt
+  - apps/kmp-client/desktopApp/build.gradle.kts
+  - apps/kmp-client/feature-crucible/src/commonMain/kotlin/desk/akasha/crucible/domain/Quest.kt
+  - apps/kmp-client/feature-crucible/src/commonMain/kotlin/desk/akasha/crucible/domain/CrucibleEngine.kt
+  - apps/kmp-client/feature-crucible/src/commonTest/kotlin/desk/akasha/crucible/domain/CrucibleEngineTest.kt
+  - apps/kmp-client/shared/src/commonMain/kotlin/desk/akasha/app/AkashaApp.kt
+  - apps/kmp-client/shared/src/commonMain/kotlin/desk/akasha/app/crucible/CrucibleDashboard.kt
+  - gradle.properties
+  - services/auth-identity/bun.lock
+  - services/auth-identity/package.json
+  - services/auth-identity/scripts/healthcheck.ts
+  - services/core-engine/src/main/kotlin/desk/akasha/core/infra/AiAgentPublisher.kt
+  - shared/schema/bun.lock
+  - shared/schema/package.json
+  - shared/schema/tsconfig.json
+- Checks Run:
+  - mise trust .mise.toml -> passed.
+  - mise --yes install -> passed; installed Java 21, Kotlin 2.3.21, Gradle 9.5.1, and Bun 1.3.14.
+  - docker compose config --quiet -> passed with Docker config access warnings for C:\Users\dia-camp\.docker\config.json.
+  - mise --yes exec -- gradle :apps:kmp-client:feature-crucible:allTests --no-daemon -> passed.
+  - mise --yes exec -- gradle :apps:kmp-client:desktopApp:compileKotlin --no-daemon -> passed.
+  - mise --yes exec -- gradle :apps:kmp-client:core-database:compileKotlinDesktop --no-daemon -> passed.
+  - mise --yes exec -- gradle :services:core-engine:compileKotlin --no-daemon -> passed.
+  - mise --yes exec -- bun install in services/auth-identity -> passed.
+  - mise --yes exec -- bun run typecheck in services/auth-identity -> passed.
+  - mise --yes exec -- bun install in shared/schema -> passed.
+  - mise --yes exec -- bun run typecheck in shared/schema -> passed.
+  - git diff --check -> passed with CRLF warnings only.
+- Result: Crucible is now the working first app surface. The desktop app compiles, Crucible domain tests pass, core backend compiles, SQLDelight cache generation compiles, auth/schema TypeScript packages typecheck, and Docker Compose config validates.
